@@ -1,0 +1,36 @@
+<main role="main" class="container">
+  <div class="starter-template">
+    <h1>Login</h1>
+    <div class="alert alert-danger" *ngIf="loginFailed">
+      <p>Invalid credentials!</p>
+    </div>
+    <div class="alert alert-success" *ngIf="userRegistered">
+      <p>Thank you for registering! You can now login.</p>
+    </div>
+    <form novalidate #f="ngForm" (ngSubmit)="login(f.value,f.valid)">
+      <div class="form-group">
+        <label for="">Username</label>
+        <input type="text" class="form-control" placeholder="Username" name="username"
+               [(ngModel)]="username"
+               #userName="ngModel"              
+               required />
+      </div>
+      <div class="alert alert-danger" *ngIf="userName.errors?.required && userName.touched">
+        Username is required.
+      </div>     
+      <div class="form-group">
+        <label for="">Password</label>
+        <input type="password" class="form-control" placeholder="Password" name="password"
+               [(ngModel)]="password"
+               #userPassword="ngModel"               
+               required />
+      </div>
+      <div class="alert alert-danger" *ngIf="userPassword.errors?.required && userPassword.touched">
+        Password is required.
+      </div>      
+      <div class="form-group">
+        <button class="btn btn-default" [disabled]="!f.valid">Login</button>
+      </div>
+    </form>
+  </div>
+</main>
