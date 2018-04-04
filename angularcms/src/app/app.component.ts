@@ -7,5 +7,11 @@ import { Component } from '@angular/core';
   providers: []
 })
 export class AppComponent {
-  title = 'app';
+  get front() {
+    if (localStorage.getItem("user") == "\"admin\"") {
+      return false;
+    } else {
+      return true;
+    }
+  }
 }

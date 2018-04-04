@@ -1,1 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
+.admin {
+  background: purple;
+  position: fixed;
+  width: 150px;
+  top: 60px;
+  left: 0;
+  margin-bottom: 0;
+  z-index: 1;
+}
+.admin li {
+   float: none;
+ }
+
+.admin li a {
+   color: white !important;
+   font-weight: bold;
+ }
+
+.space {
+   padding-left: 100px;
+ }

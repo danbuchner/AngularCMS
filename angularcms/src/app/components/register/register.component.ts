@@ -22,7 +22,7 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  register(value,valid) {
+  register({ value, valid }) {
     if (valid) {
       this.userService.register(value).subscribe(res => {
         if (res == 'userExists') {

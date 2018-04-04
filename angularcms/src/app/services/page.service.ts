@@ -21,4 +21,25 @@ export class PageService {
       .map(res => res.json());
   }
 
+  postAddPage(value) {
+    return this.http.post('http://localhost:3000/pages/add-page', value)
+      .map(res => res.json());
+  }
+
+  getEditPage(id) {
+    return this.http.get('http://localhost:3000/pages/edit-page/' + id)
+      .map(res => res.json());
+  }
+
+  postEditPage(value) {
+    console.log('posting edit page');
+    return this.http.post('http://localhost:3000/pages/edit-page/' + value.id, value)
+      .map(res => res.json());
+  }
+
+  deletePage(id) {
+    return this.http.get('http://localhost:3000/pages/delete-page/' + id)
+      .map(res => res.json());
+  }
+
 }

@@ -49,9 +49,11 @@ app.use(function (req, res, next) {
 
 var pages = require('./routes/pages.js');
 var users = require('./routes/users.js');
+var sidebar = require('./routes/sidebar.js');
 
 app.use('/pages', pages);
 app.use('/users', users);
+app.use('/sidebar', sidebar);
 
 // Start the server
 var port = 3000;

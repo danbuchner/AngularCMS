@@ -1,0 +1,37 @@
+<div class="alert alert-success" *ngIf="successMsg">
+  <p>Page added.</p>
+</div>
+
+<div class="alert alert-warning" *ngIf="errorMsg">
+  <p>Error adding page.</p>
+</div>
+
+<h1 class="page-title">Add Page</h1>
+<a class="btn btn-primary" routerLink="/admin/pages">Back to all pages</a>
+<br><br>
+
+<form novalidate #f="ngForm" (ngSubmit)="addPage(f)">
+  <div class="form-group">
+    <label for="">Title:</label>
+    <input type="text" class="form-control" placeholder="Title" name="title"
+           [(ngModel)]="title"
+           #pageTitle="ngModel"
+           minlength="2"
+           required />
+  </div>
+  <div class="alert alert-danger" *ngIf="pageTitle.errors?.required && pageTitle.touched">
+    Title is required.
+  </div>
+  <div class="alert alert-danger" *ngIf="pageTitle.errors?.minlength && pageTitle.touched">
+    Minimun length is 2.
+  </div>
+
+  <div class="form-group">
+    <label for="">Content:</label>   
+    <textarea class="form-control" name="content" cols="10" rows="10" placeholder="Content"
+              [(ngModel)]="content"></textarea>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-default" [disabled]="!f.valid">Add Page</button>
+  </div>
+</form>

@@ -1,7 +1,8 @@
 <app-navbar></app-navbar>
-
-
+<app-admin-navbar *ngIf="!front"></app-admin-navbar>
 <main role="main" class="container">
-  <router-outlet></router-outlet>
+  <div [class.space]="!front">
+    <router-outlet></router-outlet>
+  </div>
 </main>
 
