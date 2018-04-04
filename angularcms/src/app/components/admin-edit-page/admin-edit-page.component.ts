@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router} from '@angular/router';
 import { PageService } from './../../services/page.service';
+import { PageBody } from './../../models/PageBody';
 
 declare var CKEDITOR: any; 
 
@@ -11,7 +12,7 @@ declare var CKEDITOR: any;
 })
 export class AdminEditPageComponent implements OnInit {
 
-  page: any;
+  page: PageBody;
   title: string;
   content: string;
   id: string;
@@ -19,6 +20,7 @@ export class AdminEditPageComponent implements OnInit {
   errorMsg: boolean = false;
   errorMsg2: boolean = false;
   param: any;
+  sidebar: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -40,7 +42,11 @@ export class AdminEditPageComponent implements OnInit {
         this.title = page.title;
         this.content = page.content;
         this.id = page._id;
-
+        if (page.sidebar == "yes"){
+          this.sidebar = true;
+        } else {
+          this.sidebar = false;
+        }        
       });
 
     });

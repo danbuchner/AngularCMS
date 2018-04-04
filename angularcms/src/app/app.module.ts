@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { Title } from '@angular/platform-browser';
@@ -10,6 +11,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 
 import { PageService } from './services/page.service';
 import { UserService } from './services/user.service';
+import { SidebarService } from './services/sidebar.service';
 import { PagesComponent } from './components/pages/pages.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
@@ -49,10 +51,15 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     HttpModule,
+    HttpClientModule,
     FormsModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [PageService, Title, UserService],
+  providers: [
+    PageService,
+    SidebarService,
+    Title,
+    UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

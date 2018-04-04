@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { SidebarService } from './../../services/sidebar.service';
+import { Router } from '@angular/router';
+
+declare var CKEDITOR: any;
 
 @Component({
   selector: 'app-admin-sidebar',
@@ -9,21 +11,35 @@ import 'rxjs/add/operator/map';
 })
 export class AdminSidebarComponent implements OnInit {
 
+  content: string;
+  successMsg: boolean = false;
+
   constructor(
-    private http: Http
+    private sidebarService: SidebarService,
+    private router: Router
   ) { }
 
-  ngOnInit() {
+  ngOnInit(
+  ) {
+    if (localStorage.getItem("user") != "\"admin\"") {
+      this.router.navigateByUrl('');
+    } else {
+      CKEDITOR.replace('content');
+    }
+
+    this.sidebarService.getSidebar().subscribe(res => {      
+      this.content = res.content;
+    }); 
   }
 
-  getSidebar() {
-    return this.http.get('http://localhost:3000/sidebar/edit-sidebar')
-      .map(res => res.json());
+  editSidebar({ value }) {
+    value.content = CKEDITOR.instances.content.getData();
+    this.sidebarService.postSidebar(value).subscribe(res => {
+      console.log('Success! Sidebar posted.');
+      this.successMsg = true;
+      setTimeout(function () {
+        this.successMsg = false;
+      }.bind(this), 2000);
+    });
   }
-
-  postSidebar(value) {
-    return this.http.post('http://localhost:3000/sidebar/edit-sidebar', value)
-      .map(res => res.json());
-  }
-
 }

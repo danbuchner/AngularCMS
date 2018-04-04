@@ -27,10 +27,16 @@
   </div>
 
   <div class="form-group">
-    <label for="">Content:</label>   
+    <label for="">Content:</label>
     <textarea class="form-control" name="content" cols="10" rows="10" placeholder="Content"
               [(ngModel)]="content"></textarea>
   </div>
+
+  <div class="form-group">
+    <label for="hasSidebar">Has Sidebar:</label>
+    <input type="checkbox" name="hasSidebar" [(ngModel)]="hasSidebar" />
+  </div>
+
   <div class="form-group">
     <button class="btn btn-default" [disabled]="!f.valid">Add Page</button>
   </div>

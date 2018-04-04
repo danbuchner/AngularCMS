@@ -16,9 +16,9 @@ router.get('/edit-sidebar', function (req, res) {
 });
 
 /* 
-    POST Add Page
+    POST Edit sidebar
 */
-router.post('/add-page', function (req, res) {
+router.post('/edit-sidebar', function (req, res) {
 
     var id = "5ac4324df007d42be4d92617"
 

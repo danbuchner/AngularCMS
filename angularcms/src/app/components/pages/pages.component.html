@@ -1,6 +1,15 @@
 
-<div class="starter-template">
-  <h1>Title Here</h1>
-  <p class="lead">{{ pageBody?.content }}</p>
+<div class="row" *ngIf="hasSidebar">
+  <div class="col-8">
+    <div [innerHTML]="pageBody?.content"></div>
+  </div>
+  <div class="col-4">
+    <div [innerHTML]="sidebar"></div>      
+  </div>
 </div>
 
+<div class="row" *ngIf="!hasSidebar">
+  <div class="col-12">
+    <div [innerHTML]="pageBody?.content"></div>
+  </div>
+</div>

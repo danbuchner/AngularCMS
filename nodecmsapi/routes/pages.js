@@ -35,6 +35,8 @@ router.post('/add-page', function (req, res) {
     var title = req.body.title;
     var slug = req.body.title.replace(/\s+/g,'-').toLowerCase();
     var content = req.body.content;    
+    var hasSidebar = req.body.hasSidebar;
+    var sidebar = (hasSidebar) ? "yes" : "no";
 
     Page.findOne({ slug: slug}, function (err, page) {
         if (err) console.log(err);
@@ -45,7 +47,7 @@ router.post('/add-page', function (req, res) {
                 title: title,
                 slug: slug,
                 content: content,
-                sidebar: "no"
+                sidebar: sidebar
             });
 
             page.save(function (err) {
@@ -79,6 +81,8 @@ router.post('/edit-page/:id', function (req, res) {
     var title = req.body.title;
     var slug = req.body.title.replace(/\s+/g, '-').toLowerCase();
     var content = req.body.content;
+    var hasSidebar = req.body.hasSidebar;
+    var sidebar = (hasSidebar) ? "yes" : "no";
 
     Page.findOne({ slug: slug, _id: { '$ne': id } }, function (bfErr, bfPage) {
         if (bfErr) {
@@ -95,7 +99,7 @@ router.post('/edit-page/:id', function (req, res) {
                 console.log(content)
                 page.slug = slug;
                 console.log(slug)
-                //page.sidebar = "no"
+                page.sidebar = sidebar;
 
                 page.save(function (err) {
                     if (err) {
