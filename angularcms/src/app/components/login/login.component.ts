@@ -11,6 +11,8 @@ export class LoginComponent implements OnInit {
 
   public loginFailed: boolean = false;
   public userRegistered: boolean = false;
+  userName: any;
+  userPassword:any;
 
   constructor(
     private router: Router,
@@ -27,10 +29,13 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  login(value, valid) {
+  login({value,valid}) {
+    console.log('printing th form');
+    console.log(value);
+    console.log(valid);
     if (valid) {
       this.userService.login(value).subscribe(res => {
-        if (res == 'invalidlogin') {
+        if (res == 'invalidLogin') {
           this.loginFailed = true;
           setTimeout(function () {
             this.loginFailed = false;

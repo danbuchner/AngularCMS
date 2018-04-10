@@ -1,8 +1,19 @@
 <app-navbar></app-navbar>
-<app-admin-navbar *ngIf="!front"></app-admin-navbar>
-<main role="main" class="container" >
-  <div class="col-12" style="padding-left:100px" [class.space]="!front">
-    <router-outlet></router-outlet>
-  </div>
-</main>
+
+<div *ngIf="front; else adminPagesTemplate">
+  <main role="main" class="container-fluid" >
+    <div class="col-12">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>
+<ng-template #adminPagesTemplate>
+  <app-admin-navbar *ngIf="!front"></app-admin-navbar>
+  <main role="main" class="container" >
+    <div class="col-12" style="padding-left:100px">
+     <router-outlet></router-outlet>
+    </div>
+  </main>
+</ng-template>
+
 

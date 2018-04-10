@@ -17,6 +17,7 @@ export class PagesComponent implements OnInit {
   public pages: any;
   public sidebar: string;
   public hasSidebar: boolean;
+  public isHomePage: boolean = false;
 
 
   constructor(
@@ -35,28 +36,29 @@ export class PagesComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.param = params['page'];
       if (this.param === undefined) {
-        this.param = 'home';
-        this.title.setTitle('CMS');
+        //this.param = 'home';
+        this.isHomePage = true;
+        this.title.setTitle('Angular CMS');
       } else {
         this.title.setTitle(this.param.replace(/-/g,' ').replace(/\b\w/g, l => l.toUpperCase()));
+      
+        this.pageService.getPage(this.param).subscribe(pageBody => {
+          if (pageBody == null) {
+            this.router.navigateByUrl('');
+          }
+          this.pageBody = pageBody;
+
+          if (pageBody.sidebar === "yes") {
+            this.hasSidebar = true;
+            this.sidebarService.getSidebar().subscribe(sidebar => {
+              this.sidebar = sidebar.content;
+            });
+          } else {
+            this.hasSidebar = false;
+          }
+
+        })
       }
-
-      this.pageService.getPage(this.param).subscribe(pageBody => {
-        if (pageBody == null) {
-          this.router.navigateByUrl('');
-        }
-        this.pageBody = pageBody;
-
-        if (pageBody.sidebar === "yes") {
-          this.hasSidebar = true;
-          this.sidebarService.getSidebar().subscribe(sidebar => {
-            this.sidebar = sidebar.content;
-          });
-        } else {
-          this.hasSidebar = false;
-        }
-
-      })
     });
   }
 

@@ -7,7 +7,7 @@
     <div class="alert alert-success" *ngIf="userRegistered">
       <p>Thank you for registering! You can now login.</p>
     </div>
-    <form novalidate #f="ngForm" (ngSubmit)="login(f.value,f.valid)">
+    <form novalidate #f="ngForm" (ngSubmit)="login(f)">
       <div class="form-group">
         <label for="">Username</label>
         <input type="text" class="form-control" placeholder="Username" name="username"
