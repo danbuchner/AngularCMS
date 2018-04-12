@@ -21,7 +21,7 @@
     <td>
       {{ page.title }}
     </td>
-    <td>
+    <td *ngIf="page.slug != 'home'">
       <a routerLink="/admin/edit-page/{{ page._id }}">Edit</a>
     </td>
     <td *ngIf="page.slug != 'home'">
